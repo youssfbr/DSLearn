@@ -31,7 +31,7 @@ public class Topic implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "reply_id")
-    private Reply reply;
+    private Reply answer;
 
     @ManyToMany
     @JoinTable(name = "tb_topic_likes",
@@ -114,12 +114,12 @@ public class Topic implements Serializable {
         return likes;
     }
 
-    public Reply getReply() {
-        return reply;
+    public Reply getAnswer() {
+        return answer;
     }
 
-    public void setReply(Reply reply) {
-        this.reply = reply;
+    public void setAnswer(Reply answer) {
+        this.answer = answer;
     }
 
     public List<Reply> getReplies() {

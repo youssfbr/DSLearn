@@ -12,16 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/users")
 public class UserController {
     private final UserService service;
-
     public UserController(UserService service) {
         this.service = service;
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-        UserDTO dto = service.findById(id);
+        final UserDTO dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
-
 
 }

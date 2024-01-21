@@ -35,5 +35,4 @@ public class Content extends Lesson {
         this.videoUri = videoUri;
     }
 
-
 }

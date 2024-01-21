@@ -17,15 +17,20 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository repository;
-
-    public UserService(UserRepository repository) {
+    private final AuthService authService;
+    public UserService(UserRepository repository , AuthService authService) {
         this.repository = repository;
+        this.authService = authService;
     }
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Transactional(readOnly = true)
     public UserDTO findById(Long id) {
+
+        authService.validateSelfOrAdmin(id);
+
         Optional<User> obj = repository.findById(id);
         User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
         return new UserDTO(entity);
